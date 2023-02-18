@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
+import ListsComponent from './ListComponent';
 
 
 
@@ -11,7 +12,6 @@ function HomePage() {
     const sessionUser = useSelector(state => state.session.user);
 
 
-    console.log(sessionUser)
     const logout = async (e) => {
         e.preventDefault();
         await dispatch(sessionActions.logout());
@@ -21,6 +21,7 @@ function HomePage() {
     return (
         <div>
             <div>{sessionUser?.username}'s To Do Lists</div>
+            <ListsComponent/>
             <button onClick={logout}>Log Out</button>
         </div>
     )
