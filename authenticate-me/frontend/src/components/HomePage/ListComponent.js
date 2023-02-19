@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { thunkCreateList, thunkLoadLists } from '../../store/list';
+import { thunkCreateList, thunkDeleteList, thunkLoadLists } from '../../store/list';
 
 function ListsComponent() {
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ function ListsComponent() {
         dispatch(thunkLoadLists(sessionUser?.id))
     }, [dispatch])
 
-    const createList = async(e) => {
+    const createList = async (e) => {
         e.preventDefault();
         let whitespace = /^\s*$/
         if (listName.length < 0 || whitespace.test(listName)) {
@@ -32,12 +32,21 @@ function ListsComponent() {
         }
     }
 
+    const deleteList = async (listId) => {
+        await dispatch(thunkDeleteList(listId))
+    }
+
 
     return (
         <div>
             {listArray && listArray.map((item) => {
                 return (
-                    <div>{item.name}</div>
+                    <div>
+                        <div>{item.name}</div>
+                        <button type='submit' onClick={(e)=> deleteList(item.id)}>
+                            <i class="fa-solid fa-circle-minus"></i>
+                        </button>
+                    </div>
                 )
             })}
 
@@ -47,7 +56,7 @@ function ListsComponent() {
                 <input
                     type="text"
                     value={listName}
-                    onChange={(e)=> setListName(e.target.value)}
+                    onChange={(e) => setListName(e.target.value)}
                     required
                 />
                 <button type="submit">
