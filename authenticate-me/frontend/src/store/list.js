@@ -13,19 +13,19 @@ const actionLoadLists = (lists) => {
 }
 const actionCreateList = (list) => {
     return {
-        type: LOAD_LISTS,
+        type: CREATE_LIST,
         list
     }
 }
 const actionUpdateList = (list) => {
     return {
-        type: LOAD_LISTS,
+        type: UPDATE_LIST,
         list
     }
 }
 const actionDeleteList = (list) => {
     return {
-        type: LOAD_LISTS,
+        type: DELETE_LIST,
         list
     }
 }
@@ -35,13 +35,31 @@ export const thunkLoadLists = (userId) => async (dispatch) => {
 
     if (response.ok) {
         const lists = await response.json();
-        // console.log("LIST FROM THUNK")
-        // console.log(lists)
         dispatch(actionLoadLists(lists));
         return response;
     } else {
         return response.json()
     }
+}
+
+export const thunkCreateList = (listData) => async (dispatch) => {
+    console.log("LIST FROM CREATE THUNK")
+    console.log(listData)
+    const response = await csrfFetch(`/api/lists/${Number(listData.userId)}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(listData)
+    });
+
+    if (response.ok) {
+        const list = await response.json()
+        dispatch(actionCreateList(list))
+        return list;
+    }
+
+
 }
 
 const listReducer = (state = {}, action) => {
@@ -52,6 +70,12 @@ const listReducer = (state = {}, action) => {
                 newState1[item.id] = item
             });
             return newState1;
+
+        case CREATE_LIST:
+            const newState2 = {...state}
+            newState2[action.list.id] = action.list
+            return newState2
+
         default:
             return state;
     }

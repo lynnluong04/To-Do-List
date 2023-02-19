@@ -9,9 +9,17 @@ router.get(
     asyncHandler(async (req, res) => {
         const lists = await List.findAll({
             where: { userId: req.params.userId }
-        })
-        return res.json(lists)
+        });
+        return res.json(lists);
     })
-)
+);
+
+router.post(
+    '/:userId',
+    asyncHandler(async (req, res) => {
+        const list = await List.create(req.body);
+        return res.json(list)
+    })
+);
 
 module.exports = router;
