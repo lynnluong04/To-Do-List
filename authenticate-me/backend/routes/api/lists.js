@@ -18,16 +18,28 @@ router.post(
     '/user/:userId',
     asyncHandler(async (req, res) => {
         const list = await List.create(req.body);
-        return res.json(list)
+        return res.json(list);
     })
 );
 
-router.delete('/:listId',
+router.put(
+    '/:listId',
+    asyncHandler(async(req, res) => {
+        const {id, name} = req.body;
+        const list = await List.findByPk(id);
+        list.name = name;
+        await list.save();
+        return res.json(list);
+    })
+)
+
+router.delete(
+    '/:listId',
     asyncHandler(async (req, res) => {
         const list = await List.findByPk(req.params.listId);
-        let id = list.id
-        await list.destroy()
-        return res.json(id)
+        let id = list.id;
+        await list.destroy();
+        return res.json(id);
     })
 );
 

@@ -43,9 +43,7 @@ export const thunkLoadLists = (userId) => async (dispatch) => {
 }
 
 export const thunkCreateList = (listData) => async (dispatch) => {
-    console.log("LIST FROM CREATE THUNK")
-    console.log(listData)
-    const response = await csrfFetch(`/api/lists/user/${Number(listData.userId)}`, {
+    const response = await csrfFetch(`/api/lists/user/${listData.userId}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -59,6 +57,23 @@ export const thunkCreateList = (listData) => async (dispatch) => {
         return list;
     }
 
+}
+
+export const thunkUpdateList = (listData) => async (dispatch) => {
+    const response = await csrfFetch(`/api/lists/${listData.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({id: listData.id, name: listData.name})
+    })
+
+
+    if (response.ok) {
+        const list = await response.json()
+        dispatch(actionUpdateList(list))
+        return list;
+    }
 }
 
 export const thunkDeleteList = (listId) => async (dispatch) =>{
@@ -87,8 +102,12 @@ const listReducer = (state = {}, action) => {
             newState2[action.list.id] = action.list
             return newState2
 
+        case UPDATE_LIST:
+            const newState3 = {...state}
+            newState3[action.list.id] = action.list
+            return newState3
+
         case DELETE_LIST:
-            console.log("STATE RIGHT NOW", state, action.listId)
             const newState4 = {...state}
             delete newState4[action.listId]
             return newState4
