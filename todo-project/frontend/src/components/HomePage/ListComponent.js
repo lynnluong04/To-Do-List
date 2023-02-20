@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkCreateList, thunkUpdateList, thunkDeleteList, thunkLoadLists } from '../../store/list';
 
-function ListsComponent({ lists, setCurrentList }) {
+function ListsComponent({ lists, setCurrentList, currentList }) {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const [listName, setListName] = useState('');
@@ -62,20 +62,24 @@ function ListsComponent({ lists, setCurrentList }) {
         setEditingId(null)
         setEditListName('')
     }
+    console.log(currentList)
+
 
 
     return (
         <div className='list container'>
             {/* CREATE LIST */}
-            <div>Add New List</div>
-            <form onSubmit={createList}>
+            {/* <div className='add-list'>Add New List</div> */}
+            <form onSubmit={createList} className='add-list'>
                 <input
                     type="text"
                     value={listName}
                     onChange={(e) => setListName(e.target.value)}
                     required
+                    className='add-list'
+                    placeholder='Add New List...'
                 />
-                <button type="submit">
+                <button type="submit" className='add-list'>
                     <i className="fa-solid fa-circle-plus"></i>
                 </button>
 
@@ -85,7 +89,7 @@ function ListsComponent({ lists, setCurrentList }) {
                 if (item.id === editingId) {
                     return (
                         <div key={item.id}>
-                            {/* CREATE LIST ITEM */}
+                            {/* UPDATE LIST ITEM */}
                             <form onSubmit={(e) => updateList(e, item)}>
                                 <input
                                     type='text'
@@ -93,10 +97,10 @@ function ListsComponent({ lists, setCurrentList }) {
                                     onChange={(e) => setEditListName(e.target.value)}
                                     required
                                 />
-                                <button type="submit">
+                                <button type="submit" >
                                     <i className="fa-regular fa-circle-check"></i>
                                 </button>
-                                <button type="button" onClick={() => closeEditForm()}>
+                                <button type="button" onClick={() => closeEditForm()} >
                                     <i className="fa-regular fa-circle-xmark"></i>
                                 </button>
                             </form>
@@ -104,17 +108,21 @@ function ListsComponent({ lists, setCurrentList }) {
                     )
                 } else {
                     return (
-                        <div key={item.id}>
+                        <div key={item.id} className="list item container">
                             {/* LIST ITEM */}
-                            <div onClick={() => setCurrentList(item)}>{item.name}</div>
-                            {/* DELETE LIST */}
-                            <button type='submit' onClick={(e) => deleteList(item.id)}>
-                                <i className="fa-solid fa-circle-minus"></i>
-                            </button>
+                            <div onClick={() => setCurrentList(item)}  className={currentList === item? "selected-item": "list-item"} >{item.name}</div>
+
+                            <div className='list options'>
                             {/* UPDATE LIST */}
-                            <button onClick={() => openEditForm(item)}>
+                            <button type="button" className={currentList === item? "update list": "hide"} onClick={() => openEditForm(item)}>
                                 <i className="fa-regular fa-pen-to-square"></i>
                             </button>
+
+                            {/* DELETE LIST */}
+                            <button type='button' className={currentList === item? "delete list": "hide"} onClick={(e) => deleteList(item.id)}>
+                                <i className="fa-solid fa-circle-minus"></i>
+                            </button>
+                            </div>
                         </div>
                     )
                 }

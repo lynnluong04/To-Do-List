@@ -28,10 +28,10 @@ function HomePage() {
     };
 
     return (
-        <div>
+        <div className='page container'>
             <div className='top'>
-                <div>{sessionUser?.username}'s To Do Lists</div>
-                <button onClick={logout}>Log Out</button>
+                <div className='user title'>{sessionUser?.username}'s To Do Lists</div>
+                <button className='logout' onClick={logout}>Log Out</button>
             </div>
             <div className='task-list container'>
                 <ListsComponent lists={listArray} currentList={currentList} setCurrentList={setCurrentList} />
