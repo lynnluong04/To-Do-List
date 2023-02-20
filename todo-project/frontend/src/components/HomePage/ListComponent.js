@@ -2,19 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkCreateList, thunkUpdateList, thunkDeleteList, thunkLoadLists } from '../../store/list';
 
-function ListsComponent() {
+function ListsComponent({lists, setCurrentList}) {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
-    const lists = useSelector(state => state.list);
-    const listArray = Object.values(lists);
+    // const lists = useSelector(state => state.list);
     const [listName, setListName] = useState('');
     const [editListName, setEditListName] = useState('');
     const [editingId, setEditingId] = useState(null);
     const [errors, setErrors] = useState([]);
 
-    useEffect(() => {
-        dispatch(thunkLoadLists(sessionUser?.id))
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(thunkLoadLists(sessionUser?.id))
+    // }, [dispatch]);
 
     const createList = async (e) => {
         e.preventDefault();
@@ -72,7 +71,7 @@ function ListsComponent() {
 
     return (
         <div>
-            {listArray && listArray.map((item) => {
+            {lists && lists.map((item) => {
                 if (item.id === editingId) {
                     return (
                         <div key={item.id}>
@@ -95,7 +94,7 @@ function ListsComponent() {
                 } else {
                     return (
                         <div key={item.id}>
-                            <div>{item.name}</div>
+                            <div onClick={() => setCurrentList(item)}>{item.name}</div>
                             {/* DELETE LIST */}
                             <button type='submit' onClick={(e) => deleteList(item.id)}>
                                 <i className="fa-solid fa-circle-minus"></i>
