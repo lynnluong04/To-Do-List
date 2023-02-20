@@ -54,6 +54,24 @@ button.add-list {
     margin-top: 30px;
     width: fit-content;
 }
+
+input.update-list-item {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+button.submit-update {
+    border: none;
+    background-color: white;
+    color: rgb(42, 172, 42);
+}
+
+button.close-update {
+    border: none;
+    background-color: white;
+    color:rgb(78, 93, 106);
+}
+
 .list-item {
     width: 300px;
 }
@@ -97,9 +115,10 @@ button.update.list {
 }
 
 
+/* Styling for tasks */
 
 .task.container {
-    width: 50%;
+    width: 40%;
     padding: 20px;
     border: 1px solid black;
 }

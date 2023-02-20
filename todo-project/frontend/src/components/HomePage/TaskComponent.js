@@ -102,8 +102,7 @@ function TasksComponent({ lists, currentList, setCurrentList }) {
     if (currentList) {
         return (
             <div className='task container'>
-                <div>{currentList.name} List Items</div>
-                <div>{currentList && currentList.name}</div>
+                <div>{currentList && currentList.name} List Items</div>
                 {taskArray && taskArray.map((item) => {
                     if (item.id === editingId) {
                         return (
@@ -127,6 +126,7 @@ function TasksComponent({ lists, currentList, setCurrentList }) {
                         )
                     } else {
                         return (
+                            // LIST TASKS
                             <div key={item.id}>
                                 <input
                                     type='checkbox'

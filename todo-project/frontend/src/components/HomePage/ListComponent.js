@@ -96,11 +96,12 @@ function ListsComponent({ lists, setCurrentList, currentList }) {
                                     value={editListName}
                                     onChange={(e) => setEditListName(e.target.value)}
                                     required
+                                    className='update-list-item'
                                 />
-                                <button type="submit" >
-                                    <i className="fa-regular fa-circle-check"></i>
+                                <button type="submit" className='submit-update' >
+                                    <i class="fa-solid fa-circle-check"></i>
                                 </button>
-                                <button type="button" onClick={() => closeEditForm()} >
+                                <button type="button" className='close-update' onClick={() => closeEditForm()} >
                                     <i className="fa-regular fa-circle-xmark"></i>
                                 </button>
                             </form>
@@ -110,18 +111,18 @@ function ListsComponent({ lists, setCurrentList, currentList }) {
                     return (
                         <div key={item.id} className="list item container">
                             {/* LIST ITEM */}
-                            <div onClick={() => setCurrentList(item)}  className={currentList === item? "selected-item": "list-item"} >{item.name}</div>
+                            <div onClick={() => setCurrentList(item)} className={currentList === item ? "selected-item" : "list-item"} >{item.name}</div>
 
                             <div className='list options'>
-                            {/* UPDATE LIST */}
-                            <button type="button" className={currentList === item? "update list": "hide"} onClick={() => openEditForm(item)}>
-                                <i className="fa-regular fa-pen-to-square"></i>
-                            </button>
+                                {/* UPDATE LIST */}
+                                <button type="button" className={currentList === item ? "update list" : "hide"} onClick={() => openEditForm(item)}>
+                                    <i className="fa-regular fa-pen-to-square"></i>
+                                </button>
 
-                            {/* DELETE LIST */}
-                            <button type='button' className={currentList === item? "delete list": "hide"} onClick={(e) => deleteList(item.id)}>
-                                <i className="fa-solid fa-circle-minus"></i>
-                            </button>
+                                {/* DELETE LIST */}
+                                <button type='button' className={currentList === item ? "delete list" : "hide"} onClick={(e) => deleteList(item.id)}>
+                                    <i className="fa-solid fa-circle-minus"></i>
+                                </button>
                             </div>
                         </div>
                     )
