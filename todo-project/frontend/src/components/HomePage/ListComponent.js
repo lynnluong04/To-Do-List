@@ -2,18 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkCreateList, thunkUpdateList, thunkDeleteList, thunkLoadLists } from '../../store/list';
 
-function ListsComponent({lists, setCurrentList}) {
+function ListsComponent({ lists, setCurrentList }) {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
-    // const lists = useSelector(state => state.list);
     const [listName, setListName] = useState('');
     const [editListName, setEditListName] = useState('');
     const [editingId, setEditingId] = useState(null);
     const [errors, setErrors] = useState([]);
-
-    // useEffect(() => {
-    //     dispatch(thunkLoadLists(sessionUser?.id))
-    // }, [dispatch]);
 
     const createList = async (e) => {
         e.preventDefault();
@@ -71,11 +66,28 @@ function ListsComponent({lists, setCurrentList}) {
 
     return (
         <div>
+            {/* CREATE LIST */}
+            <div>Add New List</div>
+            <form onSubmit={createList}>
+                <label>Name</label>
+                <input
+                    type="text"
+                    value={listName}
+                    onChange={(e) => setListName(e.target.value)}
+                    required
+                />
+                <button type="submit">
+                    <i className="fa-solid fa-circle-plus"></i>
+                </button>
+
+            </form>
+
             {lists && lists.map((item) => {
                 if (item.id === editingId) {
                     return (
                         <div key={item.id}>
-                            <form onSubmit={(e)=>updateList(e, item)}>
+                            {/* CREATE LIST ITEM */}
+                            <form onSubmit={(e) => updateList(e, item)}>
                                 <input
                                     type='text'
                                     value={editListName}
@@ -94,6 +106,7 @@ function ListsComponent({lists, setCurrentList}) {
                 } else {
                     return (
                         <div key={item.id}>
+                            {/* LIST ITEM */}
                             <div onClick={() => setCurrentList(item)}>{item.name}</div>
                             {/* DELETE LIST */}
                             <button type='submit' onClick={(e) => deleteList(item.id)}>
@@ -108,21 +121,6 @@ function ListsComponent({lists, setCurrentList}) {
                 }
             })}
 
-            {/* CREATE LIST */}
-            <div>Add New List</div>
-            <form onSubmit={createList}>
-                <label>Name</label>
-                <input
-                    type="text"
-                    value={listName}
-                    onChange={(e) => setListName(e.target.value)}
-                    required
-                />
-                <button type="submit">
-                    <i className="fa-solid fa-circle-plus"></i>
-                </button>
-
-            </form>
         </div>
     )
 }
