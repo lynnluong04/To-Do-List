@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink, Redirect, useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import './SignupForm.css';
 
 function SignupFormPage() {
   const dispatch = useDispatch();
+  const history = useHistory()
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -15,6 +16,15 @@ function SignupFormPage() {
 
   if (sessionUser) return <Redirect to="/home" />;
 
+  const handleDemoUser = async (e) => {
+    e.preventDefault()
+    const user = {
+      credential: "Demo-User",
+      password: "password"
+    }
+    await dispatch(sessionActions.login(user))
+    history.push('/home')
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
@@ -76,6 +86,7 @@ function SignupFormPage() {
           className="signup"
         />
         <button type="submit" className="signup">Sign Up</button>
+        <button className="demo" type="button" onClick={handleDemoUser}>Demo User Login</button>
         <div id="login-link">
           <div>Already have an account?</div>
           <NavLink to={"/"} className="signup">Log in here</NavLink>

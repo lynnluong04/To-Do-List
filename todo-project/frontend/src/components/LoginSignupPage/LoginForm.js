@@ -17,6 +17,15 @@ function LoginFormPage() {
         <Redirect to="/home" />
     );
 
+    const handleDemoUser = async (e) => {
+        e.preventDefault()
+        const user = {
+            credential: "Demo-User",
+            password: "password"
+        }
+        await dispatch(sessionActions.login(user))
+        history.push('/home')
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
@@ -55,9 +64,11 @@ function LoginFormPage() {
                     className='login'
                 />
                 <button className='login' type="submit">Log In</button>
+                <button className="demo" type="button" onClick={handleDemoUser}>Demo User Login</button>
+
                 <div id="signup-link">
-                <div className='login'>Don't have an account?</div>
-                <NavLink to={"/signup"} className='login'>Sign up here</NavLink>
+                    <div className='login'>Don't have an account?</div>
+                    <NavLink to={"/signup"} className='login'>Sign up here</NavLink>
                 </div>
             </form>
 

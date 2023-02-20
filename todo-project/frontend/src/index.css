@@ -19,3 +19,6 @@ text-decoration: none;
 a:visited {
     color: inherit;
 }
+button:hover {
+    cursor: pointer;
+}

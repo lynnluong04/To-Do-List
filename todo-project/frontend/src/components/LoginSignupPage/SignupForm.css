@@ -39,6 +39,17 @@ button.signup {
     border-radius: 5px;
     font-size: 18px;
 }
+button.demo {
+    height: 40px;
+    width: 300px;
+    margin: 10px;
+    background-color:rgb(70, 130, 180);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
 
 #signup-title {
     font-weight: bold;
@@ -48,7 +59,7 @@ button.signup {
 
 #login-link {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     margin: 10px;
@@ -56,4 +67,5 @@ button.signup {
 
 a.signup {
     color: rgb(70, 130, 180);
+    margin-left: 10px;
 }
