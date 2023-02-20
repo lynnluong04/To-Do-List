@@ -5,7 +5,7 @@ import * as sessionActions from '../../store/session';
 import ListsComponent from './ListComponent';
 import { thunkLoadLists } from '../../store/list';
 import TasksComponent from './TaskComponent';
-
+import './home.css'
 
 
 function HomePage() {

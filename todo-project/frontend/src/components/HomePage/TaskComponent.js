@@ -10,31 +10,45 @@ function TasksComponent({ lists, currentList, setCurrentList }) {
     const tasks = useSelector(state => state.task)
     const taskArray = Object.values(tasks)
     const [description, setDescription] = useState('')
-    const [checkTodo, setCheckTodo] = useState('')
     const [editDescription, setEditDescription] = useState('')
     const [editingId, setEditingId] = useState(null);
-    const [status, setStatus] = useState(false)
+    const [taskStatuses, setTaskStatuses] = useState(taskArray.reduce((acc, cur) => { acc[cur.id] = false; return acc; }, {}));
     const [errors, setErrors] = useState([]);
 
-
     useEffect(() => {
-        if (currentList) dispatch(thunkLoadTasks(currentList.id))
+        const loadTasks = async () => {
+            if (currentList) {
+                const tasks = await dispatch(thunkLoadTasks(currentList.id))
+                if (tasks.length >0) {
+                    const taskStatuses = {}
+                    tasks.forEach((task) => {
+                        taskStatuses[task.id] = task.completionStatus
+                    })
+                    setTaskStatuses(taskStatuses)
+                }
+            } else {
+                return null
+            }
+        }
+        loadTasks()
     }, [dispatch, currentList])
 
     const createTask = async (e) => {
         e.preventDefault();
         let whitespace = /^\s*$/;
         if (description.length < 0 || whitespace.test(description)) {
-            return errors.push("Cannot submit an empty task")
+            setErrors(["Cannot submit an empty task"])
+            return
         };
         let task = await dispatch(thunkCreateTask({
             listId: currentList.id,
             description: description,
-            completionStatus: status
+            completionStatus: false
         }))
         if (task) {
             setErrors([])
             setDescription('')
+            setTaskStatuses({ ...taskStatuses, [task.id]: task.completionStatus })
         }
     }
 
@@ -49,7 +63,7 @@ function TasksComponent({ lists, currentList, setCurrentList }) {
         const taskData = {
             id: item.id,
             description: editDescription,
-            completionStatus: status
+            completionStatus: item.completionStatus
         }
         let task = await dispatch(thunkUpdateTask(taskData))
         if (task) {
@@ -72,9 +86,19 @@ function TasksComponent({ lists, currentList, setCurrentList }) {
         await dispatch(thunkDeleteTask(taskId))
     }
 
-    // const checkTodo = async (e) => {
-    //     e.preventDefault()
-    // }
+    const handleCheck = async (e, item) => {
+        e.preventDefault();
+        const updatedTask = {
+            ...item,
+            completionStatus: !taskStatuses[item.id]
+        };
+        setTaskStatuses({
+            ...taskStatuses,
+            [item.id]: !taskStatuses[item.id]
+        });
+        await dispatch(thunkUpdateTask(updatedTask));
+    };
+
     if (currentList) {
         return (
             <div>
@@ -83,6 +107,7 @@ function TasksComponent({ lists, currentList, setCurrentList }) {
                 {taskArray && taskArray.map((item) => {
                     if (item.id === editingId) {
                         return (
+                            // UPDATE TASK
                             <div key={item.id}>
                                 <form onSubmit={(e) => updateTask(e, item)}>
                                     <input
@@ -105,13 +130,15 @@ function TasksComponent({ lists, currentList, setCurrentList }) {
                             <div key={item.id}>
                                 <input
                                     type='checkbox'
+                                    checked={taskStatuses[item.id] || false}
+                                    onChange={(e) => handleCheck(e, item)}
                                 />
                                 {item.description}
                                 {/* DELETE TASK */}
                                 <button type="submit" onClick={(e) => deleteTask(item.id)}>
                                     <i className="fa-solid fa-circle-minus"></i>
                                 </button>
-                                {/* UPDATE TASK */}
+                                {/* UPDATE TASK BUTTON */}
                                 <button onClick={() => openEditTask(item)}>
                                     <i className="fa-regular fa-pen-to-square"></i>
                                 </button>
