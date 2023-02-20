@@ -29,7 +29,8 @@ function SignupFormPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className='signup form container'>
+    <form className="signup" onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
@@ -73,6 +74,7 @@ function SignupFormPage() {
       <div>Already have an account?</div>
       <NavLink to={"/"}>Log in here</NavLink>
     </form>
+    </div>
   );
 }
 
