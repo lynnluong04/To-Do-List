@@ -101,8 +101,8 @@ function TasksComponent({ lists, currentList, setCurrentList }) {
 
     if (currentList) {
         return (
-            <div>
-                <div>LIST ITEMS</div>
+            <div className='task container'>
+                <div>{currentList.name} List Items</div>
                 <div>{currentList && currentList.name}</div>
                 {taskArray && taskArray.map((item) => {
                     if (item.id === editingId) {

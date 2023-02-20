@@ -1,0 +1,19 @@
+.top {
+    display: flex;
+    flex-direction: row;
+}
+
+.task-list {
+    display: flex;
+    flex-direction: row;
+}
+
+.list.container {
+    width: 50%;
+}
+
+.task.container {
+    width: 50%;
+    padding: 20px;
+    border: 1px solid black;
+}

@@ -65,11 +65,10 @@ function ListsComponent({ lists, setCurrentList }) {
 
 
     return (
-        <div>
+        <div className='list container'>
             {/* CREATE LIST */}
             <div>Add New List</div>
             <form onSubmit={createList}>
-                <label>Name</label>
                 <input
                     type="text"
                     value={listName}

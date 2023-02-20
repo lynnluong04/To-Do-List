@@ -25,14 +25,18 @@ function HomePage() {
         e.preventDefault();
         await dispatch(sessionActions.logout());
         history.push('/')
-      };
+    };
 
     return (
         <div>
-            <div>{sessionUser?.username}'s To Do Lists</div>
-            <ListsComponent lists={listArray} currentList={currentList} setCurrentList={setCurrentList}/>
-            <TasksComponent lists={listArray} currentList={currentList} setCurrentList={setCurrentList}/>
-            <button onClick={logout}>Log Out</button>
+            <div className='top'>
+                <div>{sessionUser?.username}'s To Do Lists</div>
+                <button onClick={logout}>Log Out</button>
+            </div>
+            <div className='task-list container'>
+                <ListsComponent lists={listArray} currentList={currentList} setCurrentList={setCurrentList} />
+                <TasksComponent lists={listArray} currentList={currentList} setCurrentList={setCurrentList} />
+            </div>
         </div>
     )
 };
