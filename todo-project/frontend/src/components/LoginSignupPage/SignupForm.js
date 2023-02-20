@@ -30,50 +30,57 @@ function SignupFormPage() {
 
   return (
     <div className='signup form container'>
-    <form className="signup" onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul>
-      <label>
-        Email
+      <form className="signup" onSubmit={handleSubmit}>
+        <div id="signup-title">Sign Up for an Account</div>
+        <ul>
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>
+        <label className="signup">
+          Email
+        </label>
         <input
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          className="signup"
         />
-      </label>
-      <label>
-        Username
+        <label className="signup">
+          Username
+        </label>
         <input
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
+          className="signup"
         />
-      </label>
-      <label>
-        Password
+        <label className="signup">
+          Password
+        </label>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          className="signup"
         />
-      </label>
-      <label>
-        Confirm Password
+        <label className="signup">
+          Confirm Password
+        </label>
         <input
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
+          className="signup"
         />
-      </label>
-      <button type="submit">Sign Up</button>
-      <div>Already have an account?</div>
-      <NavLink to={"/"}>Log in here</NavLink>
-    </form>
+        <button type="submit" className="signup">Sign Up</button>
+        <div id="login-link">
+          <div>Already have an account?</div>
+          <NavLink to={"/"} className="signup">Log in here</NavLink>
+        </div>
+      </form>
     </div>
   );
 }

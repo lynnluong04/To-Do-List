@@ -6,7 +6,8 @@
     align-items: center;
 }
 form.signup {
-    height: 100%;
+    border: 1px solid rgb(78, 93, 106);
+    height: fit-content;
     width: 400px;
     border-radius: 10px;
     padding: 35px 10px;
@@ -14,4 +15,45 @@ form.signup {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+input.signup {
+    box-sizing: border-box;
+    height: 40px;
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(78, 93, 106);
+}
+
+button.signup {
+    height: 40px;
+    width: 300px;
+    margin: 10px;
+    background-color:rgb(70, 130, 180);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+#signup-title {
+    font-weight: bold;
+    font-size: 22px;
+    color: rgb(70, 130, 180);
+}
+
+#login-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+a.signup {
+    color: rgb(70, 130, 180);
 }
