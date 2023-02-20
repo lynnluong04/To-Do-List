@@ -19,7 +19,7 @@ function TasksComponent({ lists, currentList, setCurrentList }) {
         const loadTasks = async () => {
             if (currentList) {
                 const tasks = await dispatch(thunkLoadTasks(currentList.id))
-                if (tasks.length >0) {
+                if (tasks.length > 0) {
                     const taskStatuses = {}
                     tasks.forEach((task) => {
                         taskStatuses[task.id] = task.completionStatus
@@ -102,23 +102,23 @@ function TasksComponent({ lists, currentList, setCurrentList }) {
     if (currentList) {
         return (
             <div className='task container'>
-                <div>{currentList && currentList.name} List Items</div>
+                <div className='task-title'>{currentList && currentList.name}</div>
                 {taskArray && taskArray.map((item) => {
                     if (item.id === editingId) {
                         return (
                             // UPDATE TASK
-                            <div key={item.id}>
-                                <form onSubmit={(e) => updateTask(e, item)}>
+                            <div key={item.id} className="edit-task container">
+                                <form onSubmit={(e) => updateTask(e, item)} className="edit-task">
                                     <input
                                         type='text'
                                         value={editDescription}
                                         onChange={(e) => setEditDescription(e.target.value)}
                                         required
                                     />
-                                    <button type="submit">
+                                    <button type="submit" className="edit task">
                                         <i className="fa-regular fa-circle-check"></i>
                                     </button>
-                                    <button type="button" onClick={() => closeEditTask()}>
+                                    <button type="button" onClick={() => closeEditTask()} className="edit task">
                                         <i className="fa-regular fa-circle-xmark"></i>
                                     </button>
                                 </form>
@@ -127,37 +127,44 @@ function TasksComponent({ lists, currentList, setCurrentList }) {
                     } else {
                         return (
                             // LIST TASKS
-                            <div key={item.id}>
-                                <input
-                                    type='checkbox'
-                                    checked={taskStatuses[item.id] || false}
-                                    onChange={(e) => handleCheck(e, item)}
-                                />
-                                {item.description}
-                                {/* DELETE TASK */}
-                                <button type="submit" onClick={(e) => deleteTask(item.id)}>
-                                    <i className="fa-solid fa-circle-minus"></i>
-                                </button>
-                                {/* UPDATE TASK BUTTON */}
-                                <button onClick={() => openEditTask(item)}>
-                                    <i className="fa-regular fa-pen-to-square"></i>
-                                </button>
+                            <div key={item.id} className="individual-task-container" >
+                                <div className="task-item">
+                                    <input
+                                        type='checkbox'
+                                        checked={taskStatuses[item.id] || false}
+                                        onChange={(e) => handleCheck(e, item)}
+                                        className="task-checkbox"
+                                    />
+                                    <label className='task-label'>{item.description}</label>
+                                </div>
+                                <div className='task-options'>
+                                    {/* UPDATE TASK BUTTON */}
+                                    <button onClick={() => openEditTask(item)} className="edit task">
+                                        <i className="fa-regular fa-pen-to-square"></i>
+                                    </button>
+
+                                    {/* DELETE TASK */}
+                                    <button type="submit" onClick={(e) => deleteTask(item.id)} className="delete task">
+                                        <i className="fa-solid fa-circle-minus"></i>
+                                    </button>
+                                </div>
                             </div>
                         )
                     }
                 })}
-                {/* CREATE TASK */}
 
+                {/* CREATE TASK */}
                 {currentList &&
-                    <form onSubmit={createTask}>
+                    <form onSubmit={createTask} className="add-task">
                         <input
                             type='text'
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             required
-                            placeholder='Add a new task '
+                            placeholder='Add new task...'
+                            className='add-task'
                         />
-                        <button type="submit">
+                        <button type="submit" className='submit add task'>
                             <i className="fa-solid fa-circle-plus"></i>
                         </button>
                     </form>

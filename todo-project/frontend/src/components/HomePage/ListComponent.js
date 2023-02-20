@@ -25,7 +25,9 @@ function ListsComponent({ lists, setCurrentList, currentList }) {
         if (list) {
             setErrors([])
             setListName('')
+            setCurrentList(list)
         };
+
     };
 
     const updateList = async (e, item) => {
@@ -51,6 +53,7 @@ function ListsComponent({ lists, setCurrentList, currentList }) {
 
     const deleteList = async (listId) => {
         await dispatch(thunkDeleteList(listId));
+        setCurrentList(null)
     };
 
     const openEditForm = (item) => {
