@@ -30,11 +30,11 @@ function LoginFormPage() {
     return (
         <div className='login form container'>
             <form className='login' onSubmit={handleSubmit}>
-                <div> Log in to your account</div>
-                <ul>
+                <div id="login-title"> Log in to your account</div>
+                <ul className='login errors'>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
-                <label>
+                <label className='login'>
                     Username or Email
                 </label>
                 <input
@@ -42,8 +42,9 @@ function LoginFormPage() {
                     value={credential}
                     onChange={(e) => setCredential(e.target.value)}
                     required
+                    className='login'
                 />
-                <label>
+                <label className='login'>
                     Password
                 </label>
                 <input
@@ -51,10 +52,13 @@ function LoginFormPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    className='login'
                 />
-                <button type="submit">Log In</button>
-                <div>Don't have an account?</div>
-                <NavLink to={"/signup"}>Sign up here</NavLink>
+                <button className='login' type="submit">Log In</button>
+                <div id="signup-link">
+                <div className='login'>Don't have an account?</div>
+                <NavLink to={"/signup"} className='login'>Sign up here</NavLink>
+                </div>
             </form>
 
         </div>
