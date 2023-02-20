@@ -5,7 +5,7 @@ import { thunkCreateTask, thunkLoadTasks, thunkUpdateTask, thunkDeleteTask } fro
 
 
 
-function TasksComponent({ lists, currentList, setCurrentList }) {
+function TasksComponent({ currentList }) {
     const dispatch = useDispatch();
     const tasks = useSelector(state => state.task)
     const taskArray = Object.values(tasks)

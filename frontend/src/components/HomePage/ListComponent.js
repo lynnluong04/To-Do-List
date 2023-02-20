@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { thunkCreateList, thunkUpdateList, thunkDeleteList, thunkLoadLists } from '../../store/list';
+import { thunkCreateList, thunkUpdateList, thunkDeleteList } from '../../store/list';
 
 function ListsComponent({ lists, setCurrentList, currentList }) {
     const dispatch = useDispatch();
@@ -65,7 +65,6 @@ function ListsComponent({ lists, setCurrentList, currentList }) {
         setEditingId(null)
         setEditListName('')
     }
-    console.log(currentList)
 
 
 
