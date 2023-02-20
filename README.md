@@ -31,3 +31,5 @@ per-env
 pg@">=8.4.1"
 sequelize@5
 sequelize-cli@5
+
+Run npm start in both the backend and frontend folder
