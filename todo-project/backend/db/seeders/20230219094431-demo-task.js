@@ -8,7 +8,7 @@ module.exports = {
       */
 
       return queryInterface.bulkInsert('Tasks', [{
-        listId: 2,
+        listId: 1,
         description: "this is a demo task",
         completionStatus: false,
         createdAt: new Date(),
