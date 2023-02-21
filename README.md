@@ -11,8 +11,7 @@ Live Site: https://lynn-todo.onrender.com/
 
 Setting up the Development Environment
 1. Clone this repository
-2. Install the following dependencies in the backend folder
-Initialize the server's package.json by running npm init -y.
+2. Install the following dependencies in the backend folder. Initialize the server's package.json by running npm init -y. 
 npm install the following packages as dependencies:
 bcryptjs
 cookie-parser
@@ -36,8 +35,7 @@ sequelize-cli@5
     - npx sequelize-cli db:migrate in the backend folder
     - npx sequelize-cli db:seed:all
 
-6. Go into your react app directory and install dependencies and run the app
-In the frontend folder, npm install the following packages as dependencies:
+6. Go into your react app directory and install dependencies and run the app. In the frontend folder, npm install the following packages as dependencies:
 js-cookie
 react-redux
 react-router-dom@^5
