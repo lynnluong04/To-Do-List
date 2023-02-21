@@ -11,6 +11,7 @@ Live Site: https://lynn-todo.onrender.com/
 ## Database Schema
 ![image](https://user-images.githubusercontent.com/100899731/220232766-6dbfbe0f-a68c-4018-a874-b9348b3efc04.png)
 
+## Development Set Up
 Setting up the Development Environment
 1. Clone this repository
 2. Install the following dependencies in the backend folder. Initialize the server's package.json by running npm init -y. 
