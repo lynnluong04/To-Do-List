@@ -48,6 +48,7 @@ function ListsComponent({ lists, setCurrentList, currentList }) {
             setErrors([])
             setEditListName('')
             setEditingId(null)
+            setCurrentList(list)
         };
     };
 
