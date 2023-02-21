@@ -8,6 +8,8 @@ Live Site: https://lynn-todo.onrender.com/
 - Lists (full CRUD)
 - Tasks (full CRUD)
 
+## Database Schema
+![image](https://user-images.githubusercontent.com/100899731/220232766-6dbfbe0f-a68c-4018-a874-b9348b3efc04.png)
 
 Setting up the Development Environment
 1. Clone this repository
