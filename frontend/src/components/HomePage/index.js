@@ -18,7 +18,7 @@ function HomePage() {
 
     useEffect(() => {
         dispatch(thunkLoadLists(sessionUser?.id))
-    });
+    }, [dispatch, sessionUser]);
 
 
     const logout = async (e) => {
