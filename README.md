@@ -2,7 +2,6 @@
 
 Live Site: https://lynn-todo.onrender.com/
 
-
 ## Features
 - Users (signup and login)
 - Lists (full CRUD)
@@ -14,6 +13,7 @@ Live Site: https://lynn-todo.onrender.com/
 ## Development Set Up
 Setting up the Development Environment
 1. Clone this repository
+
 2. Install the following dependencies in the backend folder. Initialize the server's package.json by running npm init -y. 
 npm install the following packages as dependencies:
 bcryptjs
@@ -33,7 +33,9 @@ sequelize@5
 sequelize-cli@5
 
 3. Create a **.env** file based on the example with the proper settings for your development environment in the backend
+
 4. Setup your PostgresSQL user,password, and database and make sure it matches with your **.env** file
+
 5. Enter your environment, migrate your database, seed your database, and run your app
     - npx sequelize-cli db:migrate in the backend folder
     - npx sequelize-cli db:seed:all
